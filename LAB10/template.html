@@ -37,15 +37,20 @@
                     <div class="col-6 bg-info">3</div>
                     <div class="col-3 bg-warning">3</div>
                 </div>
-                <div>
-                </div>
             </div>
 
-            <button class="btn_load" type="button" data="one">ONE</button>
-            <button class="btn_load" type="button" data="two">TWO</button>
-            <div id="div_load"></div>
-            <script src="./assets/js/bootstrap.min.js"></script>
-            <script src="./assets/js/jquery-3.2.1.min.js"></script>
+        </div>
+    </div>
+
+    <button class="btn_load" type="button" data="one">ONE</button>
+    <button class="btn_load" type="button" data="two">TWO</button>
+    <button class="btn_load" type="button" data="data">API</button>
+    <button class="btn_load" type="button" data="data-table">DATA-TABLE</button>
+
+    <div id="div_load"></div>
+
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/jquery-3.2.1.min.js"></script>
 </body>
 
 </html>
@@ -59,6 +64,28 @@
             file = "./views/template/" + data + ".html";
             $("#div_load").load(file);
         });
+        $("[data ='data']").click(function() {
+            $.ajax({
+                method: "GET",
+                url: "./models/template/list_data.php",
+                data: {},
+                success: function(msg) {
+                    $("#div_load").text(msg);
+                }
+            });
+        });
+
+        $("[data ='data-table']").click(function() {
+            $.ajax({
+                method: "GET",
+                url: "./models/template/list_data_table.php",
+                data: {},
+                success: function(msg) {
+                    $("#div_load").html(msg);
+                }
+            });
+        });
+
 
     }); //jQuery Handle
 </script>
